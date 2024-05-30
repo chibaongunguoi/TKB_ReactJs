@@ -5,7 +5,7 @@ import Form from './Form'
 
 export default function App() {
   let [count,setCount]=useState('');
-  let [isSubmit,setIsSubmit]=useState(JSON.parse(localStorage.getItem('subjects')||"{}")!=null);
+  let [isSubmit,setIsSubmit]=useState(JSON.parse(localStorage.getItem('subjects'))!=null);
   return(
   <div id="wrapper">
      {!isSubmit ?
