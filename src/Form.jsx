@@ -1,7 +1,6 @@
 import {  useState,useRef,useEffect } from 'react'
 import {renderTable,validate} from './render_table'
 let id=1;
-
 let pointer=0;
 var color=["#55E6C1","#fd9644","#8e44ad","#f1c40f","#4b7bec","#2ecc71","#fc5c65"]
 export function Input({value,className,title,edit,id,reflist}){
@@ -31,13 +30,16 @@ return (<ul id={subject.id} className={'line'}>
 }
 
 export default function Form({count}) {
+  
   let refinput=useRef([])
   let [des,setDes]=useState([]);
   let [subjects,setSubject]=useState(()=>{
     if (JSON.parse(localStorage.getItem('subjects')))
       {
-        id=parseInt( JSON.parse(localStorage.getItem('subjects'))[-1].id);
+        id=JSON.parse(localStorage.getItem('subjects'))[JSON.parse(localStorage.getItem('subjects')).length-1].id;
         id++;
+        // console.log(id)
+
       return JSON.parse(localStorage.getItem('subjects'));
       }
     let lines=[];
