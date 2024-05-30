@@ -1,10 +1,7 @@
 import {  useState,useRef,useEffect } from 'react'
 import {renderTable,validate} from './render_table'
-// const cookies = new Cookies();
-// cookies.set('myCat', 'Pacman', { path: '/' });
-// console.log(cookies.get('myCat'));
-// import { subId } from './Context.tsx';
 let id=1;
+
 let pointer=0;
 var color=["#55E6C1","#fd9644","#8e44ad","#f1c40f","#4b7bec","#2ecc71","#fc5c65"]
 export function Input({value,className,title,edit,id,reflist}){
@@ -38,13 +35,16 @@ export default function Form({count}) {
   let [des,setDes]=useState([]);
   let [subjects,setSubject]=useState(()=>{
     if (JSON.parse(localStorage.getItem('subjects')))
+      {
+        id=parseInt( JSON.parse(localStorage.getItem('subjects'))[-1].id);
+        id++;
       return JSON.parse(localStorage.getItem('subjects'));
+      }
     let lines=[];
     for (id=1;id<=count;id++)
       lines.push({id:id,name:'',room:'',day:'',begin:'',end:''});
       return lines;
   })
-  console.log(subjects)
   useEffect(()=>{
     localStorage.setItem("subjects", JSON.stringify(subjects));
   },[subjects])
