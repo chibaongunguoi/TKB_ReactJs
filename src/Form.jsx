@@ -29,7 +29,7 @@ return (<ul id={subject.id} className={'line'}>
 <Input reflist={reflist} id={subject.id}className={"day"} value={subject.day} title={'Thứ'}edit={edit} />
 <Input reflist={reflist} id={subject.id}className={"begin"} value={subject.begin} title={'Từ tiết'}edit={edit} />
 <Input reflist={reflist} id={subject.id}className={"end"} value={subject.end} title={'Đến hết tiết'}edit={edit} />
-<button className="delete" value={subject.id } onClick={(e)=>{del(e.target.value)}}>xóa</button>
+<button className="delete" value={subject.id } onClick={(e)=>{del(e.target.value);localStorage.clear();location.reload()}}>xóa</button>
 </ul>)
 }
 
