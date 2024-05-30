@@ -8,7 +8,7 @@ export default function App() {
   let [isSubmit,setIsSubmit]=useState(JSON.parse(localStorage.getItem('subjects'))!=null);
   return(
   <div id="wrapper">
-    <Analytics/>
+    <Analytics />
      {!isSubmit ?
       (<form id="row_number" onSubmit={()=>setIsSubmit(true)}>
         
