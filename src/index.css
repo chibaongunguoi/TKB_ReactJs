@@ -1,0 +1,138 @@
+
+
+#wrapper {
+  margin: 0px auto;
+  width: 1700px;
+  
+
+  /* background-color: red;  */
+}
+#line ul,.function {
+  margin-top: 40px;
+}
+ul.line {
+  display:flex
+}
+.del{
+  padding-top: 0px
+}
+label{
+  font-size: 22px;
+}
+.smallbox {
+  width: 960px;
+}
+* {
+  font-family: "Roboto", sans-serif;
+}
+ul {
+  list-style-type: none;
+  padding: 0px;
+}
+li input:not(.name) {
+  width: 90px;
+  
+}
+input {
+  font-size: 24px;
+  margin-right: 60px;
+}
+button {
+  font-size: 24px;
+  margin-right: 40px;
+}
+ul ul {
+  list-style-type: none;
+  margin: 0px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+#name {
+  margin: 0px auto;
+}
+.table p {
+  width: 50px;
+  height: 40px;
+  background-color: #7f8fa6;
+  text-align: center;
+  padding-top: 7px;
+  margin: 5px;
+  color: white;
+  font-size: 21px;
+}
+
+.more {
+  margin-top: 25px !important;
+}
+.table {
+  max-width: 150%;
+  width:1700px ;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 100px;
+}
+/* .table2{
+    position: relative;
+    left:45px;
+    top:-480px;     
+} */
+.table li div:first-child {
+  width: 60px;
+  position: relative;
+  left: 6px;
+  font-weight: bold;
+  font-size: 20px;
+}
+.table li div {
+  width: 90px;
+  position: relative;
+  left: 6px;
+  font-size: 20px;
+}
+.table li:last-child div:first-child {
+  position: relative;
+  left: 14px !important;
+}
+.a {
+  background-color: red;
+  width: 50px;
+  height: 50px;
+}
+.run {
+  width: 40px;
+  position: relative;
+}
+#line ul li div {
+  font-size: 20px;
+}
+a {
+  display: block;
+  font-size: 30px;
+  /* text-decoration: none; */
+}
+.info{
+  width: 100px;
+  /* height: 30px; */
+display: block;
+padding-top: 24px;
+font-size: 22px;
+/* display: none; */
+}
+.info li{
+  display: block;
+  width: 150px;
+  height: 40px;
+  padding-top: 12px;
+  margin: 5px;
+  text-align:right;
+}
+.bigtable{
+  width: 1700px;
+  padding-top: 10px;
+  display: flex;
+  font-size: 20px;
+  /* justify-content: space-evenly; */
+}
