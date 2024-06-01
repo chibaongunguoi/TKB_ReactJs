@@ -105,7 +105,7 @@ function keyup(e){
       })}
        <div className="function">
         <button onClick={add} id="render">Thêm môn học</button>
-        <button id="reset" style={{backgroundColor:'red'}} onClick={()=>{localStorage.removeItem(`subject${currentForm}`);location.reload()}} >Làm mới TKB này</button>
+        <button class='text-white' id="reset" style={{backgroundColor:'#eb2f06'}} onClick={()=>{localStorage.removeItem(`subject${currentForm}`);location.reload()}} >Làm mới TKB này</button>
       </div>
   </ul>
       <div className="bigtable">
