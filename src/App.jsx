@@ -12,7 +12,7 @@ export default function App() {
   function addForm(){
     setCountForm(parseInt(countForm)+1);
     console.log(parseInt(countForm)+1,'after setcountForm')
-    localStorage.setItem('countForm',countForm+1);
+    localStorage.setItem('countForm',parseInt(countForm)+1);
   }
   function changecurrentForm(e){
     setCurrentForm(e.target.value);
@@ -37,11 +37,25 @@ export default function App() {
 }
 function Bar({count,addForm,changecurrentForm,currentForm}){
   let tkb=[];
+  let style={margin:0};
   for (let i=1;i<=count;i++){
     if (i==currentForm)
-    tkb.push(<button data-toggle="tab" onClick={(e)=>{changecurrentForm(e)}}class="nav-item nav-link active" value={i}>TKB {i}</button>)
+    tkb.push(
+    <>
+    <section class="nav-item nav-link active" style={{backgroundColor:'blue'}}>
+    <button style={style} data-toggle="tab" onClick={(e)=>{changecurrentForm(e)}}class=" active" value={i}>TKB {i}</button>
+    <button style={style} class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button>
+    <button style={style} onclick={()=> confirm('Bạn có chắc chắn xóa bản ghi này?')} class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
+    </section>
+    </>)
     else
-    tkb.push(<button data-toggle="tab"  onClick={e=>{changecurrentForm(e)}}class="nav-item nav-link" value={i}>TKB {i}</button>)
+    tkb.push(<>
+      <section class="nav-item nav-link">
+      <button style={style} data-toggle="tab" onClick={(e)=>{changecurrentForm(e)}} value={i}>TKB {i}</button>
+      <button style={style} class=" btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button>
+      <button style={style} onclick="return confirm('Bạn có chắc chắn xóa bản ghi này?')" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
+      </section>
+      </>)
   }
   return (
   <nav>
