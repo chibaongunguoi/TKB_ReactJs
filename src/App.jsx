@@ -16,7 +16,6 @@ export default function App() {
         idForm++;
       return JSON.parse(localStorage.getItem('formList'));
       }
-    // console.log(idForm);
     return [{id:idForm++,title:'TKB của tôi'}];
   })
   useEffect(()=>{
@@ -24,7 +23,6 @@ export default function App() {
   },[currentForm])
   function changecurrentForm(e){
     e.preventDefault();
-    console.log(e.target.dataset.value)
     setCurrentForm(e.target.dataset.value);
     // e.target.style.backgroundColor='blue';
   }
@@ -54,11 +52,14 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
   
   function addForm(){
     let title=prompt('TKB mới này sẽ có tên là:');
+    console.log(title)
     setCurrentForm(idForm);
+   if (title==null||title=='')
+    title=`TKB ${idForm}`;
     setFormList([...formList,{id:idForm++,title:title}]);
   }
   function delform(e){
-    console.log(e.target.value,formList)
+
     setFormList(formList.filter((form => form.id!=e.target.value)))
     localStorage.removeItem(`subject${e.target.value}`);
     if (e.target.value==currentForm){
@@ -67,8 +68,10 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
     // let bar = confirm('Confirm or deny');
   }
   function editform(e){
-    console.log(e.target,formList)
+    
     let title=prompt('Bạn muốn đổi tên thành:');
+    if (title==null||title=='')
+      title=`TKB ${e.target.value}`;
     setFormList(formList.map((form => {
       if (form.id!=e.target.value){
         return form; 
@@ -95,6 +98,7 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
         <div class="nav nav-tabs">
         {tkb}
           <button onClick={addForm}>Thêm TKB </button>
+          {/* <i onClick={addForm} class="fa-solid fa-plus"></i> */}
         </div>
       </nav>
   )
