@@ -1,8 +1,12 @@
 import {  useState,useRef,useEffect } from 'react'
-import {renderTable,validate} from './render_table'
+import {renderTable,validate,adddes,resetColor} from './render_table'
 let id=1;
 let pointer=0;
 var color=["#55E6C1","#fd9644","#8e44ad","#f1c40f","#4b7bec","#2ecc71","#fc5c65"]
+window.addEventListener('resize', function(event) {//
+  $(window).scrollTop(0);
+  location.reload();
+});//
 export function Input({value,className,title,edit,id,reflist}){
  return (<li>
   <label>{title}:</label>
@@ -30,7 +34,7 @@ return (<ul id={subject.id} className={'line'}>
 }
 
 export default function Form({count}) {
-  
+  // console.log(id)
   let refinput=useRef([])
   let [des,setDes]=useState([]);
   let [subjects,setSubject]=useState(()=>{
@@ -38,8 +42,6 @@ export default function Form({count}) {
       {
         id=JSON.parse(localStorage.getItem('subjects'))[JSON.parse(localStorage.getItem('subjects')).length-1].id;
         id++;
-        // console.log(id)
-
       return JSON.parse(localStorage.getItem('subjects'));
       }
     let lines=[];
@@ -101,7 +103,7 @@ function keyup(e){
       })}
        <div className="function">
         <button onClick={add} id="render">Thêm môn học</button>
-        <button id="reset" style={{backgroundColor:'red'}} onClick={()=>{localStorage.clear();location.reload()}} >Làm mới</button>
+        <button id="reset" style={{backgroundColor:'red'}} onClick={()=>{localStorage.clear();location.reload()}} >Làm lại từ đầu</button>
       </div>
   </ul>
       <div className="bigtable">
@@ -138,8 +140,7 @@ function Table({subjects,des,setDes}){
   let [nodes,table]=renderTable();
   
   useEffect(()=>{
-    for (let i=1;i<=98;i++)
-      nodes.get(i).style.backgroundColor='#7f8fa6';
+    resetColor(nodes);
     for (let i of subjects){
       let day=parseInt(i.day);
       let begin=parseInt(i.begin);
@@ -148,37 +149,7 @@ function Table({subjects,des,setDes}){
         {
           let top=nodes.get((day-2)*14+begin).getBoundingClientRect().top;
           let left=nodes.get((day-2)*14+begin).getBoundingClientRect().left;
-          setDes(
-            des=>{            
-              if (des.length==0)
-              return [...des,{id:i.id,
-                content:<div className='des' style={{
-                  position:'absolute',top:top,left:left+60}}>
-                <b>{i.name}</b>
-               <br />{i.room} 
-               </div>}]
-               else{
-                let desNode=des.filter((item)=>item.id==i.id);
-                  if (desNode.length==0) 
-                    return [...des,{id:i.id,
-                      content:<div style={{position:'absolute',top:top,left:left+60}}>
-                      <b>{i.name}</b>
-                     <br />{i.room} 
-                     </div>}]
-                     else{
-                      return des.map((item)=>{
-                        if (item.id==i.id)
-                          return {id:i.id,
-                            content:<div style={{position:'absolute',top:top,left:left+60}}>
-                            <b>{i.name}</b>
-                           <br />{i.room} 
-                           </div>}
-                           else return item;
-                      })
-                     }
-               }
-              }
-          );
+          setDes(des =>adddes(des,top,left,i));
           for (let j=begin;j<=end;j++){
             nodes.get((day-2)*14+j).style.backgroundColor=color[day-2]
           }

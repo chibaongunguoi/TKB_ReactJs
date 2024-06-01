@@ -46,3 +46,28 @@ export function validate(day,begin,end){
     return false;
   return true;
 }
+
+export function adddes(des,top,left,i){
+  if (des.length==0||des.filter((item)=>item.id==i.id).length==0)
+    return [...des,{id:i.id,
+      content:<div className='des' style={{
+        position:'absolute',top:top,left:left+60}}>
+      <b>{i.name}</b>
+     <br />{i.room} 
+     </div>}]
+     else{
+            return des.map((item)=>{
+              if (item.id==i.id)
+                return {id:i.id,
+                  content:<div style={{position:'absolute',top:top,left:left+60}}>
+                  <b>{i.name}</b>
+                 <br />{i.room} 
+                 </div>}
+                 else return item;
+            })
+           }    
+}
+export function resetColor(nodes){
+  for (let i=1;i<=98;i++)
+    nodes.get(i).style.backgroundColor='#7f8fa6';
+}
