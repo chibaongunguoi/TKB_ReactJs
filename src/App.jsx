@@ -96,8 +96,7 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
   <nav>
         <div class="nav nav-tabs">
         {tkb}
-          <button onClick={addForm}>Thêm TKB </button>
-          {/* <i onClick={addForm} class="fa-solid fa-plus"></i> */}
+          <i onClick={addForm} class="add-icon fa-solid fa-plus"></i>
         </div>
       </nav>
   )
