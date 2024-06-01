@@ -52,10 +52,9 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
   
   function addForm(){
     let title=prompt('TKB mới này sẽ có tên là:');
-    console.log(title)
-    setCurrentForm(idForm);
    if (title==null||title=='')
-    title=`TKB ${idForm}`;
+    return;
+   setCurrentForm(idForm);
     setFormList([...formList,{id:idForm++,title:title}]);
   }
   function delform(e){
