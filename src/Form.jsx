@@ -33,16 +33,16 @@ return (<ul id={subject.id} className={'line'}>
 </ul>)
 }
 
-export default function Form({count}) {
-  // console.log(id)
+export default function Form({count,currentForm}) {
+  console.log(`subject${currentForm}`)
   let refinput=useRef([])
   let [des,setDes]=useState([]);
   let [subjects,setSubject]=useState(()=>{
-    if (JSON.parse(localStorage.getItem('subjects')))
+    if (JSON.parse(localStorage.getItem(`subject${currentForm}`)))
       {
-        id=JSON.parse(localStorage.getItem('subjects'))[JSON.parse(localStorage.getItem('subjects')).length-1].id;
+        id=JSON.parse(localStorage.getItem(`subject${currentForm}`))[JSON.parse(localStorage.getItem(`subject${currentForm}`)).length-1].id;
         id++;
-      return JSON.parse(localStorage.getItem('subjects'));
+      return JSON.parse(localStorage.getItem(`subject${currentForm}`));
       }
     let lines=[];
     for (id=1;id<=count;id++)
@@ -50,7 +50,7 @@ export default function Form({count}) {
       return lines;
   })
   useEffect(()=>{
-    localStorage.setItem("subjects", JSON.stringify(subjects));
+    localStorage.setItem(`subject${currentForm}`, JSON.stringify(subjects));
   },[subjects])
 
 
