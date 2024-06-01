@@ -7,10 +7,15 @@ window.addEventListener('resize', function(event) {//
   $(window).scrollTop(0);
   location.reload();
 });//
-export function Input({value,className,title,edit,id,reflist}){
+export function Input({value,className,title,edit,id,reflist,index}){
+  function handlefocus(e){
+    pointer=parseInt(e.target.dataset.value);
+  }
  return (<li>
   <label>{title}:</label>
-  <input ref={(node) => {
+  <input onFocus={handlefocus}
+  data-value={index}
+  ref={(node) => {
           if (node) {
             reflist.current.push({id:id,node:node})
           } 
@@ -21,14 +26,14 @@ export function Input({value,className,title,edit,id,reflist}){
 </li>);
 }
 
-export function Line({subject,edit,del,reflist}){
+export function Line({subject,edit,del,reflist,index}){
 
 return (<ul id={subject.id} className={'line'}>
-<Input reflist={reflist} id={subject.id} className={"name"} value={subject.name} title={'Môn học'} edit={edit}/>
-<Input reflist={reflist} id={subject.id}className={"room"} value={subject.room} title={'Phòng học'}edit={edit} />
-<Input reflist={reflist} id={subject.id}className={"day"} value={subject.day} title={'Thứ'}edit={edit} />
-<Input reflist={reflist} id={subject.id}className={"begin"} value={subject.begin} title={'Từ tiết'}edit={edit} />
-<Input reflist={reflist} id={subject.id}className={"end"} value={subject.end} title={'Đến hết tiết'}edit={edit} />
+<Input index={parseInt(index)*5}reflist={reflist} id={subject.id} className={"name"} value={subject.name} title={'Môn học'} edit={edit}/>
+<Input index={parseInt(index)*5+1}reflist={reflist} id={subject.id}className={"room"} value={subject.room} title={'Phòng học'}edit={edit} />
+<Input index={parseInt(index)*5+2}reflist={reflist} id={subject.id}className={"day"} value={subject.day} title={'Thứ'}edit={edit} />
+<Input index={parseInt(index)*5+3}reflist={reflist} id={subject.id}className={"begin"} value={subject.begin} title={'Từ tiết'}edit={edit} />
+<Input index={parseInt(index)*5+4}reflist={reflist} id={subject.id}className={"end"} value={subject.end} title={'Đến hết tiết'}edit={edit} />
 <button className="delete" value={subject.id } onClick={(e)=>{del(e.target.value);localStorage.clear();location.reload()}}>xóa</button>
 </ul>)
 }
@@ -93,9 +98,9 @@ function keyup(e){
   return(
     <>
     <ul>
-      {subjects.map((subject)=>{
+      {subjects.map((subject,index)=>{
         return (
-        <Line reflist={refinput} key={subject.id} subject={subject} edit={edit} del={deleteLine}/>
+        <Line index={index}reflist={refinput} key={subject.id} subject={subject} edit={edit} del={deleteLine}/>
       )
       })}
        <div className="function">

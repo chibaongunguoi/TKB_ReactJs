@@ -49,6 +49,7 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
     if (formList.length==0) setFormList([{id:idForm++,title:'TKB của tôi'}]);
     localStorage.setItem('formList', JSON.stringify(formList));
   },[formList])
+  
   function addForm(){
     let title=prompt('TKB mới này sẽ có tên là:');
     setCurrentForm(idForm);
