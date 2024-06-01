@@ -76,7 +76,7 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
   }
   
   let tkb=[];
-  let style={margin:0};
+  let style={marginRight:6};
   
   for (let i of formList){
     tkb.push(<>
