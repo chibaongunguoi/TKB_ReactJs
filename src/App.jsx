@@ -89,6 +89,7 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
       <a class={i.id==currentForm?"":'text-muted'} href='' style={style} data-toggle="tab" onClick={(e)=>{changecurrentForm(e)}} data-value={i.id}>{i.title}</a>
       <button style={style}value={i.id} onClick={editform} class=" btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit">ĐỔI TÊN</button>
       <button hidden={i.id==formList[0].id? true:false}style={style} value={i.id} onClick={delform} class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete">XÓA</button>
+      
       </section>
       </>)
   }
