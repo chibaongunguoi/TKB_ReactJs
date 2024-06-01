@@ -68,10 +68,9 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
     // let bar = confirm('Confirm or deny');
   }
   function editform(e){
-    
     let title=prompt('Bạn muốn đổi tên thành:');
     if (title==null||title=='')
-      title=`TKB ${e.target.value}`;
+      title=e.target.previousElementSibling.innerHTML;
     setFormList(formList.map((form => {
       if (form.id!=e.target.value){
         return form; 
