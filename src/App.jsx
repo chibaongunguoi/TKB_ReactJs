@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import Form from './Form'
 import { Analytics } from "@vercel/analytics/react"
-
+import {initSubject} from './render_table'
 
 export default function App() {
   let [count,setCount]=useState('');
   let [currentForm,setCurrentForm]=useState(localStorage.getItem('currentForm')==null?1:localStorage.getItem('currentForm'));
-  let [isSubmit,setIsSubmit]=useState(JSON.parse(localStorage.getItem(`subject${currentForm}`))!=null);
+  let isSubmit=(JSON.parse(localStorage.getItem(`subject${currentForm}`))!=null);
   let [countForm,setCountForm]=useState(localStorage.getItem('countForm')==null?1:localStorage.getItem('countForm'));
   function addForm(){
     setCountForm(countForm+1);
@@ -19,16 +19,15 @@ export default function App() {
   return(
   <div id="wrapper">
     <Analytics />
+    <Bar count={countForm} addForm={addForm} changecurrentForm={changecurrentForm} currentForm={currentForm}/> 
      {!isSubmit ?
-      (<form id="row_number" onSubmit={()=>setIsSubmit(true)}>
+      (<form id="row_number" onSubmit={()=>localStorage.setItem(`subject${currentForm}`,JSON.stringify( initSubject(count)))}>
         <label >Nhập số môn bạn học trong học kì này (từ 1 đến 20):</label>
         <input  id="row_n" value={count}
          onChange={(e) => setCount(e.target.value)}/>
         <input type="submit" value="Thêm" />
       </form>):
       <>
-      <Bar count={countForm} addForm={addForm} changecurrentForm={changecurrentForm} currentForm={currentForm}/> 
-      
       <Form count={count} currentForm={currentForm} key={currentForm}/>
       </>}
     </div>

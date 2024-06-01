@@ -1,5 +1,5 @@
 import {  useState,useRef,useEffect } from 'react'
-import {renderTable,validate,adddes,resetColor} from './render_table'
+import {renderTable,validate,adddes,resetColor,initSubject} from './render_table'
 let id=1;
 let pointer=0;
 var color=["#55E6C1","#fd9644","#8e44ad","#f1c40f","#4b7bec","#2ecc71","#fc5c65"]
@@ -44,10 +44,8 @@ export default function Form({count,currentForm}) {
         id++;
       return JSON.parse(localStorage.getItem(`subject${currentForm}`));
       }
-    let lines=[];
-    for (id=1;id<=count;id++)
-      lines.push({id:id,name:'',room:'',day:'',begin:'',end:''});
-      return lines;
+    id=count+1;
+    return initSubject(count);
   })
   useEffect(()=>{
     localStorage.setItem(`subject${currentForm}`, JSON.stringify(subjects));
@@ -103,7 +101,7 @@ function keyup(e){
       })}
        <div className="function">
         <button onClick={add} id="render">Thêm môn học</button>
-        <button id="reset" style={{backgroundColor:'red'}} onClick={()=>{localStorage.clear();location.reload()}} >Làm lại từ đầu</button>
+        <button id="reset" style={{backgroundColor:'red'}} onClick={()=>{localStorage.removeItem(`subject${currentForm}`);location.reload()}} >Làm mới TKB này</button>
       </div>
   </ul>
       <div className="bigtable">

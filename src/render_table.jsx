@@ -71,3 +71,9 @@ export function resetColor(nodes){
   for (let i=1;i<=98;i++)
     nodes.get(i).style.backgroundColor='#7f8fa6';
 }
+export function initSubject(count){
+  let lines=[];
+    for ( let id=1;id<=count;id++)
+      lines.push({id:id,name:'',room:'',day:'',begin:'',end:''});
+      return lines;
+} 
