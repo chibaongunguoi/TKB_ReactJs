@@ -8,8 +8,10 @@ export default function App() {
   let [currentForm,setCurrentForm]=useState(localStorage.getItem('currentForm')==null?1:localStorage.getItem('currentForm'));
   let isSubmit=(JSON.parse(localStorage.getItem(`subject${currentForm}`))!=null);
   let [countForm,setCountForm]=useState(localStorage.getItem('countForm')==null?1:localStorage.getItem('countForm'));
+  console.log(countForm,'render');
   function addForm(){
-    setCountForm(countForm+1);
+    setCountForm(parseInt(countForm)+1);
+    console.log(parseInt(countForm)+1,'after setcountForm')
     localStorage.setItem('countForm',countForm+1);
   }
   function changecurrentForm(e){

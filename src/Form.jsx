@@ -34,7 +34,6 @@ return (<ul id={subject.id} className={'line'}>
 }
 
 export default function Form({count,currentForm}) {
-  console.log(`subject${currentForm}`)
   let refinput=useRef([])
   let [des,setDes]=useState([]);
   let [subjects,setSubject]=useState(()=>{
