@@ -7,6 +7,19 @@
 
   /* background-color: red;  */
 }
+section.nav-link{
+  width: 240px;
+  /* display: flex; */
+  padding: 5px;
+  /* display: flex;
+    align-items: flex-start; */
+}
+div.menu-item-name{
+  float: left;
+}
+i.toggle-function{
+  margin-top:20px;
+}
 #line ul,.function {
   margin-top: 40px;
 }
@@ -111,7 +124,7 @@ ul ul {
 a {
   display: block;
   font-size: 30px;
-  /* text-decoration: none; */
+  text-decoration: none;
 }
 .info{
   width: 100px;

@@ -35,7 +35,7 @@ return (<ul id={subject.id} className={'line'}>
 <Input index={parseInt(index)*5+3}reflist={reflist} id={subject.id}className={"begin"} value={subject.begin} title={'Từ tiết'}edit={edit} />
 <Input index={parseInt(index)*5+4}reflist={reflist} id={subject.id}className={"end"} value={subject.end} title={'Đến hết tiết'}edit={edit} />
 {/* <button className="delete" value={subject.id } onClick={(e)=>{del(e.target.value)}}>xóa</button> */}
-<div><i data-value={subject.id } onClick={(e)=>{del(e.target.dataset.value)}} class="del-icon fa fa-trash btn btn-danger btn-sm rounded-0 text-white"></i></div>
+<div><i data-value={subject.id } onClick={(e)=>{del(e.target.dataset.value)}} class="del-icon fa-solid fa-xmark btn btn-danger btn-sm rounded-0 text-white"></i></div>
 </ul>)
 }
 
@@ -52,11 +52,42 @@ export default function Form({count,currentForm}) {
     id=count+1;
     return initSubject(count);
   })
+  let [nodes,table]=renderTable();
+  let [top,setTop]=useState(nodes.size?nodes.get(1).getBoundingClientRect().top:0);
+  let [left,setleft]=useState(nodes.size?nodes.get(1).getBoundingClientRect().left:0);
+  
+  function updateDes(subjects,des){
+    resetColor(nodes);
+    for (let i of subjects){
+      let day=parseInt(i.day);
+      let begin=parseInt(i.begin);
+      let end=parseInt(i.end);
+      if(validate(day,begin,end))
+        {
+          let top=nodes.get((day-2)*14+begin).getBoundingClientRect().top;
+          let left=nodes.get((day-2)*14+begin).getBoundingClientRect().left;
+          setDes(des =>adddes(des,top,left,i));
+          for (let j=begin;j<=end;j++){
+            nodes.get((day-2)*14+j).style.backgroundColor=color[day-2]
+          }
+        }
+        else{
+          if (des.filter((item) =>item.id==i.id).length>0){
+            setDes(des.filter((item) =>item.id!=i.id))
+          }
+        }
+    }
+  }
+  useEffect(()=>{
+    // window.addEventListener("click",()=>{updateDes(subjects,des)})
+    // window.addEventListener("scroll",updateDes(subjects,des))
+    // return ()=>window.removeEventListener("keyup",updateDes(subjects,des))
+  })
   useEffect(()=>{
     localStorage.setItem(`subject${currentForm}`, JSON.stringify(subjects));
   },[subjects])
 
-
+ 
   function add(){
     setSubject([...subjects,{id:id,name:'',room:'',day:'',begin:'',end:''}]);
     id++;
@@ -71,8 +102,7 @@ export default function Form({count,currentForm}) {
     })
     setSubject(nextsubject);
   }
-  
-
+ 
   function deleteLine(id){
     setSubject(subjects.filter((subject)=> subject.id!=id));
     setDes(des.filter((des)=> des.id!=id));
@@ -106,13 +136,13 @@ function keyup(e){
       })}
        <div className="function">
         <button onClick={add} id="render">Thêm môn học</button>
-        <button class='text-white' id="reset" style={{backgroundColor:'#eb2f06'}} onClick={()=>{localStorage.removeItem(`subject${currentForm}`);location.reload()}} >Làm mới TKB này</button>
+        
       </div>
   </ul>
       <div className="bigtable">
         <Time />
         <div className="smallbox">
-          <Table subjects={subjects} des={des} setDes={setDes}/>
+          <Table subjects={subjects} des={des} setDes={setDes} nodes={nodes} table={table} updateDes={updateDes}/>
         </div>
       </div>
   </>
@@ -139,36 +169,17 @@ function Time(){
   );
 }
 
-function Table({subjects,des,setDes}){
-  let [nodes,table]=renderTable();
+function Table({subjects,des,setDes,nodes,table,updateDes}){
+  
   
   useEffect(()=>{
-    resetColor(nodes);
-    for (let i of subjects){
-      let day=parseInt(i.day);
-      let begin=parseInt(i.begin);
-      let end=parseInt(i.end);
-      if(validate(day,begin,end))
-        {
-          let top=nodes.get((day-2)*14+begin).getBoundingClientRect().top;
-          let left=nodes.get((day-2)*14+begin).getBoundingClientRect().left;
-          setDes(des =>adddes(des,top,left,i));
-          for (let j=begin;j<=end;j++){
-            nodes.get((day-2)*14+j).style.backgroundColor=color[day-2]
-          }
-        }
-        else{
-          if (des.filter((item) =>item.id==i.id).length>0){
-            setDes(des.filter((item) =>item.id!=i.id))
-          }
-        }
-    }
+    updateDes(subjects,des);
   },[subjects])
+  
   return (
     <>
     <ul className="table" id="table">
-      {table}
-      
+      {table} 
   </ul>
   {des.length>0 &&
   des.map((item)=>item.content)}

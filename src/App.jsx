@@ -18,6 +18,8 @@ export default function App() {
       }
     return [{id:idForm++,title:'TKB của tôi'}];
   })
+ 
+
   useEffect(()=>{
     localStorage.setItem('currentForm',currentForm );
   },[currentForm])
@@ -49,7 +51,22 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
     if (formList.length==0) setFormList([{id:idForm++,title:'TKB của tôi'}]);
     localStorage.setItem('formList', JSON.stringify(formList));
   },[formList])
-  
+
+  function copyTKB(id){
+    let subjects;
+    let title=prompt('TKB mới được copy sang sẽ có tên là:');
+     if (title==null||title=='')
+      return;
+     setCurrentForm(idForm);
+     if (JSON.parse(localStorage.getItem(`subject${id}`)))
+      {
+      subjects= JSON.parse(localStorage.getItem(`subject${id}`));
+      }
+      else{
+     subjects=initSubject(count);}
+     localStorage.setItem(`subject${idForm}`, JSON.stringify(subjects));
+      setFormList([...formList,{id:idForm++,title:title}]);
+  }
   function addForm(){
     let title=prompt('TKB mới này sẽ có tên là:');
    if (title==null||title=='')
@@ -78,19 +95,31 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
     })))
     // let bar = confirm('Confirm or deny');
   }
-  
   let tkb=[];
   let style={marginRight:6};
   
   for (let i of formList){
-    tkb.push(<>
-      <section class="nav-item nav-link" >
+    tkb.push(<div key={i.id}>
+      <section class="dropdown "  >
+        <div class="menu-item-name">
       <a class={i.id==currentForm?"":'text-muted'} href='' style={style} data-toggle="tab" onClick={(e)=>{changecurrentForm(e)}} data-value={i.id}>{i.title}</a>
       <button style={style}value={i.id} onClick={editform} class=" btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit">ĐỔI TÊN</button>
       <button hidden={i.id==formList[0].id? true:false}style={style} value={i.id} onClick={delform} class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete">XÓA</button>
-      
+        </div>
+        <i class="fa-solid fa-caret-down btn toggle-function btn " data-bs-toggle="dropdown" aria-expanded="false"></i>
+        {/* <div class="collapse navbar-collapse" id={`navbarSupportedContent${i.id}`}> */}
+      <ul class="dropdown-menu">
+        <li class="">
+          <a class="dropdown-item " href="" onClick={(e)=>{e.preventDefault();copyTKB(i.id)}}>Sao chép TKB này</a>
+        </li>
+        <li class="">
+          <a class='dropdown-item text-danger' href=""  onClick={(e)=>{e.preventDefault();localStorage.removeItem(`subject${currentForm}`);location.reload()}} >Làm mới TKB này</a>
+        </li>
+        
+      </ul>
+    {/* </div> */}
       </section>
-      </>)
+      </div>)
   }
   return (
   <nav>
