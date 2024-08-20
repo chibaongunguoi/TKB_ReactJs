@@ -3,10 +3,10 @@ import {renderTable,validate,adddes,resetColor,initSubject} from './render_table
 let id=1;
 let pointer=0;
 var color=["#55E6C1","#fd9644","#8e44ad","#f1c40f","#4b7bec","#2ecc71","#fc5c65"]
-window.addEventListener('resize', function(event) {//
-  $(window).scrollTop(0);
-  location.reload();
-});//
+// window.addEventListener('resize', function(event) {//
+//   $(window).scrollTop(0);
+//   location.reload();
+// });//
 export function Input({value,className,title,edit,id,reflist,index}){
   function handlefocus(e){
     pointer=parseInt(e.target.dataset.value);
@@ -79,11 +79,6 @@ export default function Form({count,currentForm}) {
     }
   }
   useEffect(()=>{
-    // window.addEventListener("click",()=>{updateDes(subjects,des)})
-    // window.addEventListener("scroll",updateDes(subjects,des))
-    // return ()=>window.removeEventListener("keyup",updateDes(subjects,des))
-  })
-  useEffect(()=>{
     localStorage.setItem(`subject${currentForm}`, JSON.stringify(subjects));
   },[subjects])
 
@@ -131,7 +126,7 @@ function keyup(e){
     <ul>
       {subjects.map((subject,index)=>{
         return (
-        <Line index={index}reflist={refinput} key={subject.id} subject={subject} edit={edit} del={deleteLine}/>
+                 <Line index={index}reflist={refinput} key={subject.id} subject={subject} edit={edit} del={deleteLine}/>
       )
       })}
        <div className="function">

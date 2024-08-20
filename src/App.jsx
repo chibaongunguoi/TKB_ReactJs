@@ -3,12 +3,12 @@ import Form from './Form'
 import { Analytics } from "@vercel/analytics/react"
 import {initSubject} from './render_table'
 
-let idForm=1;
+let idForm=0;
 export default function App() {
   let [count,setCount]=useState('');
   let [currentForm,setCurrentForm]=useState(localStorage.getItem('currentForm')==null?1:localStorage.getItem('currentForm'));
   let isSubmit=(JSON.parse(localStorage.getItem(`subject${currentForm}`))!=null);
-  let [countForm,setCountForm]=useState(localStorage.getItem('countForm')==null?1:localStorage.getItem('countForm'));
+  
   let [formList,setFormList]=useState(()=>{
     if (JSON.parse(localStorage.getItem('formList'))&&JSON.parse(localStorage.getItem('formList')).length>0)
       {
@@ -74,6 +74,62 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
    setCurrentForm(idForm);
     setFormList([...formList,{id:idForm++,title:title}]);
   }
+  function insertForm(idForm){
+    let tkb=prompt('Nhập thời khóa biểu ở web trường :');
+   if (tkb==null||tkb=='')
+    return;
+  let id=0,name='',room='',day='',begin='',end='',subject=[];
+
+
+    let dem=0,i =0;
+    while (i<tkb.length){
+      dem=0,name='',room='',day='',begin='',end='';
+      while (dem<2){
+        if (tkb[i]=='\t') dem++;
+        i++;
+      }
+      while (tkb[i]!='\t'){
+        name+=tkb[i];
+        i++;
+      }
+      while (dem<7){
+        if (tkb[i]=='\t') dem++;
+        i++;
+      }
+      while (tkb[i]!=','){
+        i++;
+      } 
+      if (tkb[i-1] in ['2','3','4','5','6','7','8','9']){
+      day+=tkb[i-1];
+      }
+      else day='8';
+      i++;
+      while (tkb[i]!='-'){
+        begin+=tkb[i];
+        i++;
+      }
+      i++;
+      while (tkb[i]!=','){
+        end+=tkb[i];
+        i++;
+      }
+      i++;
+      while (tkb[i]!='\t'){
+        room+=tkb[i];
+        i++;
+      }
+      i++;
+      while (tkb[i]!='\n'&&i<tkb.length){
+        i++;
+      }
+      i++;
+      id++;
+    subject.push({id:id,name:name,room:room,day:day,begin:begin,end:end});
+    }
+    localStorage.setItem(`subject${idForm}`,JSON.stringify(subject));
+    location.reload();
+    return;
+  }
   function delform(e){
 
     setFormList(formList.filter((form => form.id!=e.target.value)))
@@ -100,33 +156,45 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
   
   for (let i of formList){
     tkb.push(<div key={i.id}>
-      <section class="dropdown "  >
-        <div class="menu-item-name">
-      <a class={i.id==currentForm?"":'text-muted'} href='' style={style} data-toggle="tab" onClick={(e)=>{changecurrentForm(e)}} data-value={i.id}>{i.title}</a>
-      <button style={style}value={i.id} onClick={editform} class=" btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit">ĐỔI TÊN</button>
-      <button hidden={i.id==formList[0].id? true:false}style={style} value={i.id} onClick={delform} class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete">XÓA</button>
+      <section className="dropdown "  >
+        <div className="menu-item-name">
+      <a className={i.id==currentForm?"":'text-muted'} href='' style={style} data-toggle="tab" onClick={(e)=>{changecurrentForm(e)}} data-value={i.id}>{i.title}</a>
+      <button style={style}value={i.id} onClick={editform} className=" btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit">ĐỔI TÊN</button>
+      <button hidden={i.id==formList[0].id? true:false}style={style} value={i.id} onClick={delform} className="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete">XÓA</button>
         </div>
-        <i class="fa-solid fa-caret-down btn toggle-function btn " data-bs-toggle="dropdown" aria-expanded="false"></i>
-        {/* <div class="collapse navbar-collapse" id={`navbarSupportedContent${i.id}`}> */}
-      <ul class="dropdown-menu">
-        <li class="">
-          <a class="dropdown-item " href="" onClick={(e)=>{e.preventDefault();copyTKB(i.id)}}>Sao chép TKB này</a>
+        <i className="fa-solid fa-caret-down btn toggle-function btn " data-bs-toggle="dropdown" aria-expanded="false"></i>
+      <ul className="dropdown-menu">
+        <li className="">
+          <a className="dropdown-item " href="" onClick={(e)=>{e.preventDefault();copyTKB(i.id)}}>Sao chép TKB này</a>
         </li>
-        <li class="">
-          <a class='dropdown-item text-danger' href=""  onClick={(e)=>{e.preventDefault();localStorage.removeItem(`subject${currentForm}`);location.reload()}} >Làm mới TKB này</a>
+        <li className="insert">
+
+          <a className="dropdown-item " href="" onClick={(e)=>{e.preventDefault();}}>chèn TKB từ web trường<i style={{marginLeft:"5px"}} className="fa-solid fa-caret-right"></i></a>
+          <ul className="dropdown-menu">
+            <li>
+            <a className="dropdown-item " href="" onClick={(e)=>{e.preventDefault();insertForm(i.id)}}>Đại học Bách Khoa Đà Nẵng</a>
+            </li>
+          </ul>
         </li>
-        
+        <li className="">
+          <a className='dropdown-item text-danger' href=""  onClick={(e)=>{e.preventDefault();localStorage.removeItem(`subject${i.id}`);location.reload()}} >Làm mới TKB này</a>
+        </li>  
       </ul>
-    {/* </div> */}
       </section>
       </div>)
   }
   return (
   <nav>
-        <div class="nav nav-tabs">
+        <div className="nav nav-tabs">
         {tkb}
-          <i onClick={addForm} class="add-icon fa-solid fa-plus"></i>
+          <i onClick={addForm} className="add-icon fa-solid fa-plus"></i>
         </div>
       </nav>
   )
 }
+
+
+
+
+
+

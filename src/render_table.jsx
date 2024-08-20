@@ -28,6 +28,7 @@ export function renderTable(){
         }
       }}
 >{j}</p>)
+
        day.push(<li key={i}>{line}</li>) 
     }
     return [itemsRef.current,day];
@@ -59,7 +60,7 @@ export function adddes(des,top,left,i){
             return des.map((item)=>{
               if (item.id==i.id)
                 return {id:i.id,
-                  content:<div style={{position:'absolute',top:top,left:left+60}}>
+                  content:<div className='des' style={{position:'absolute',top:top,left:left+60,}}>
                   <b>{i.name}</b>
                  <br />{i.room} 
                  </div>}
