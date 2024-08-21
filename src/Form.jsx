@@ -101,7 +101,7 @@ function keyup(e){
       })}
        <div className="function">
         <button onClick={add} id="render">Thêm môn học</button>
-        <button style={{backgroundColor:"#007bff",borderColor:'#007bff',marginLeft:"60vw"}} onClick={()=>{window.open("https://youtube.com/playlist?list=PLX4N6hFoJoOBBizkL4dK2_fGh_DI7JQzi&si=euHGcERES6tQ9wv7", "_blank");}} id="render">Hướng dẫn sử dụng </button>
+        {/* <button style={{backgroundColor:"#007bff",borderColor:'#007bff',marginLeft:"60vw"}} onClick={()=>{window.open("https://youtube.com/playlist?list=PLX4N6hFoJoOBBizkL4dK2_fGh_DI7JQzi&si=euHGcERES6tQ9wv7", "_blank");}} id="render">Hướng dẫn sử dụng </button> */}
       </div>
   </ul>
     {check.length>0? <div className='alert alert-danger' style={{fontSize:'21px'}}><i class="fa-solid fa-triangle-exclamation"></i> Chú ý các môn {check} đang bị trùng lịch xin hãy kiểm tra lại</div>:''}
