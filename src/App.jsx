@@ -115,11 +115,12 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
           <a className="dropdown-item " href="" onClick={(e)=>{e.preventDefault();copyTKB(i.id)}}>Sao chép TKB này</a>
         </li>
         <li className="insert-tkb">
-          <a className="dropdown-item " href="" onClick={(e)=>{e.preventDefault();}}>chèn TKB từ web trường<i style={{marginLeft:"72px"}} className="fa-solid fa-caret-right"></i></a>
+          <a className="dropdown-item " href="" onClick={(e)=>{e.preventDefault();}}>chèn TKB từ web trường<i style={{marginLeft:"102px"}} className="fa-solid fa-caret-right"></i></a>
           <ul className="dropdown-menu">
             <li>
             <a className="dropdown-item " href="" onClick={(e)=>{e.preventDefault();insertForm(i.id)}}>Đại học Bách Khoa Đà Nẵng</a>
             </li>
+           
           </ul>
         </li>
         <li className="insert-dk">
