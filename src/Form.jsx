@@ -52,7 +52,7 @@ export default function Form({count,currentForm}) {
     localStorage.setItem(`subject${currentForm}`, JSON.stringify(subjects));
   },[subjects])
   
-  let [table]=renderTable(subjects);
+  let [check,table]=renderTable(subjects);
  
   function add(){
     setSubject([...subjects,{id:id,name:'',room:'',day:'',begin:'',end:''}]);
@@ -104,6 +104,7 @@ function keyup(e){
         
       </div>
   </ul>
+    {check.length>0? <div className='alert alert-danger'>Chú ý các môn {check} đang bị trùng lịch xin hãy kiểm tra lại</div>:''}
       <div className="bigtable">
         <Time />
         <div className="smallbox">

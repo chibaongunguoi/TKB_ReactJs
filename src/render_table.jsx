@@ -1,12 +1,7 @@
-import { useRef } from 'react'
+
 export function renderTable(subjects){
   var color=["#55E6C1","#fd9644","#8e44ad","#f1c40f","#4b7bec","#2ecc71","#fc5c65"]
-  let desn=[],dem=0,kt=0,p=0;
-  let inf=
-  <>
-  <b>DSTT</b>
-  <br />E205
-  </>;
+  let desn=[],dem=0,p=0;
   for (let i of subjects){
     let day=parseInt(i.day);
     let begin=parseInt(i.begin);
@@ -17,10 +12,6 @@ export function renderTable(subjects){
           <b>{i.name}</b>
           <br />{i.room}
           </>});
-        //tô màu xong rồi mới gán đếm
-        // for (let j=begin;j<=end;j++){
-        //   nodes.get((day-2)*14+j).style.backgroundColor=color[day-2]
-        // }
       }
   }
    for (let i=0;i<desn.length-1;i++){
@@ -32,6 +23,7 @@ export function renderTable(subjects){
       }
     }
    }
+   let check=checkdesn(desn,subjects); 
   let day=[],i=2,j=1;
   while (i<=8)
     {
@@ -60,31 +52,31 @@ export function renderTable(subjects){
                 <p  
                     className={j==6||j==11?"node more":"node"} style={{backgroundColor:color[parseInt(desn[p].begin/14)]}}  
                     >{j}</p>
-                 
                 </div>
               )
               dem--;
               j++;
           }
           p++;
+          while (p<desn.length&&(i-2)*14+j>desn[p].begin)
+          {p++;}
         }
         else{
         line.push(
           <div className='wrapnode'>
             <p  
                 className={j==6||j==11?"node more":"node"}  
-                >{j}</p>
-             
+                >{j}</p>   
             </div>
           )
           j++;
       }
-      
+
     }
        day.push(<li key={i}>{line}</li>)
        i++; 
     }
-    return [day];
+    return [check,day];
 }
 
 export function validate(day,begin,end){
@@ -100,7 +92,59 @@ export function validate(day,begin,end){
     return false;
   return true;
 }
-
+export function checkdesn(desn,subjects){
+  let check=[],i=1,p=0;
+  while (p<desn.length){
+    i=1;
+    while (p+i<desn.length && desn[p].begin+desn[p].dem>desn[p+i].begin){
+      if (i==1)
+      check.push(desn[p].id,desn[p+i].id)
+    else
+      check.push(desn[p+i].id)
+    i++;
+    }
+    p++
+  }
+  check=sort(check);
+  p=0;
+  while (p<check.length-1){
+    while (p+1<check.length&&check[p]==check[p+1])
+    {
+      check.splice(p,1);
+    }
+    p++;
+  }
+  p=0,i=0;
+  while (p<check.length){
+    if (check[p]==subjects[i].id){
+      check[p]=subjects[i].name;
+      p++;
+      i++;
+    }else if(check[p]<=subjects[i].id){
+      p++;
+    }else{
+      i++;
+    }
+  }
+  i=0;
+  while (i<check.length-1){
+    check[i]+=', ';
+    i++;
+  }
+  return check;
+}
+function sort(a){
+  for (let i=0;i<a.length-1;i++){
+    for (let j=i+1;j<a.length;j++){
+      if (a[i]>a[j]){
+        let t=a[i];
+        a[i]=a[j];
+        a[j]=t
+      }
+    }
+   }
+   return a;
+}
 
 export function initSubject(count){
   let lines=[];
