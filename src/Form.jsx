@@ -104,7 +104,7 @@ function keyup(e){
         
       </div>
   </ul>
-    {check.length>0? <div className='alert alert-danger'>Chú ý các môn {check} đang bị trùng lịch xin hãy kiểm tra lại</div>:''}
+    {check.length>0? <div className='alert alert-danger' style={{fontSize:'21px'}}><i class="fa-solid fa-triangle-exclamation"></i> Chú ý các môn {check} đang bị trùng lịch xin hãy kiểm tra lại</div>:''}
       <div className="bigtable">
         <Time />
         <div className="smallbox">
