@@ -106,6 +106,7 @@ div.desnew{
   position: absolute;
   left:55px;
   top:-10px;
+  font-size: 18px;
 }
 .table p.node {
   width: 50px;
@@ -213,5 +214,6 @@ font-size: 22px;
   }
   div.desnew{
     width: 10vw;
+    font-size: 18px;
   }
 }
