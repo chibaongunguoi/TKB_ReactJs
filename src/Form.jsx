@@ -7,7 +7,7 @@ export function Input({value,className,title,edit,id,reflist,index}){
   function handlefocus(e){
     pointer=parseInt(e.target.dataset.value);
   }
- return (<li>
+ return (<li className='l-in'>
   <label>{title}:</label>
   <input onFocus={handlefocus}
   data-value={index}
