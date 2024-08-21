@@ -135,6 +135,68 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
     location.reload();
     return;
   }
+  function insertFormdk(idForm){
+    let tkb=prompt('Nhập thời khóa biểu ở web đăng kí tín chỉ :');
+   if (tkb==null||tkb=='')
+    return;
+  let id=0,name='',room='',day='',begin='',end='',subject=[],kt=0;
+    let dem=0,i =0;
+    
+    while (i<tkb.length){
+      dem=0,name='',room='',day='',begin='',end='';
+      while (dem<2){
+        if (tkb[i]=='\t') dem++;
+        i++;
+      }
+      while (tkb[i]!='\t'){
+        name+=tkb[i];
+        i++;
+      }
+      while (dem<5){
+        if (tkb[i]=='\t') dem++;
+        i++;
+      }
+      while (tkb[i]!=':'){
+        i++;
+      } 
+      
+      for (let j=2;j<=7;j++)
+        if (tkb[i-1]==j.toString()){
+      day+=tkb[i-1];
+    kt=1;
+  break;}
+      
+      if (kt==0)
+      day='8';
+      i+=2;
+      while (tkb[i]!='-'){
+        begin+=tkb[i];
+        i++;
+      }
+      i++;
+      while (tkb[i]!=','){
+        end+=tkb[i];
+        i++;
+      }
+      i++;
+      
+      while (tkb[i]!='\t'){
+        room+=tkb[i];
+        i++;
+      }
+      i++;
+      while (tkb[i]!='\n'&&i<tkb.length){
+        i++;
+      }
+      i++;
+      id++;
+      console.log({id:id,name:name,room:room,day:day,begin:begin,end:end})
+    subject.push({id:id,name:name,room:room,day:day,begin:begin,end:end});
+  }
+    localStorage.setItem(`subject${idForm}`,JSON.stringify(subject));
+    location.reload();
+    return;
+  }
   function delform(e){
 
     setFormList(formList.filter((form => form.id!=e.target.value)))
@@ -172,12 +234,19 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
         <li className="">
           <a className="dropdown-item " href="" onClick={(e)=>{e.preventDefault();copyTKB(i.id)}}>Sao chép TKB này</a>
         </li>
-        <li className="insert">
-
-          <a className="dropdown-item " href="" onClick={(e)=>{e.preventDefault();}}>chèn TKB từ web trường<i style={{marginLeft:"5px"}} className="fa-solid fa-caret-right"></i></a>
+        <li className="insert-tkb">
+          <a className="dropdown-item " href="" onClick={(e)=>{e.preventDefault();}}>chèn TKB từ web trường<i style={{marginLeft:"72px"}} className="fa-solid fa-caret-right"></i></a>
           <ul className="dropdown-menu">
             <li>
             <a className="dropdown-item " href="" onClick={(e)=>{e.preventDefault();insertForm(i.id)}}>Đại học Bách Khoa Đà Nẵng</a>
+            </li>
+          </ul>
+        </li>
+        <li className="insert-dk">
+          <a className="dropdown-item " href="" onClick={(e)=>{e.preventDefault();}}>chèn TKB từ web đăng kí tín chỉ<i style={{marginLeft:"5px"}} className="fa-solid fa-caret-right"></i></a>
+          <ul className="dropdown-menu">
+            <li>
+            <a className="dropdown-item " href="" onClick={(e)=>{e.preventDefault();insertFormdk(i.id)}}>Đại học Bách Khoa Đà Nẵng</a>
             </li>
           </ul>
         </li>

@@ -1,8 +1,8 @@
-1	0130590.2410.23.05	B23-GDTC3-CL-05	0			Khoa G.dục thể chất - ĐHĐN	Thứ 3,7-10,GDTC	3-18								
-2	1023290.2410.23.11	Cơ sở dữ liệu	2			Trương Ngọc Châu	Thứ 7,3-4,F208	3-18								
-3	2170020.2410.23.72	Kinh tế chính trị Mác - Lênin	2			Văn Công Vũ	Thứ 4,9-10,F310	3-18								
-4	1023693.2410.23.11	Lập trình hướng đối tượng	2.5			Lê Thị Mỹ Hạnh	Thứ 3,3-5,E207	3-18								
-5	1022913.2410.23.11	Nguyên lý hệ điều hành	2.5			Trần Hồ Thủy Tiên	Thứ 4,1-3,E102	3-18								
-6	1023690.2410.23.11B	PBL 2: Đồ án cơ sở lập trình	2			Lê Thị Mỹ Hạnh	Thứ 3,1-2,E208	3-18								
-7	1022830.2410.23.11	Phân tích & thiết kế giải thuật	2			Đặng Thiên Bình	Thứ 5,9-10,E302	3-18								
-8	2090101.2410.23.11	Tư tưởng Hồ Chí Minh	2			Dương Anh Hoàng	Thứ 4,4-5,E102	3-18 
+1	0130590.2410.23.05	B23-GDTC3-CL-05	0	Khoa Giáo dục thể chất	Thứ 3: 7-10,GDTC	3-18	7/19/2024 3:23:30 PM	 	X	 	 	 	50/50	 	
+2	1023290.2410.23.11	Cơ sở dữ liệu	2	Trương Ngọc Châu	Thứ 7: 3-4,F208	3-18	7/15/2024 10:57:57 AM	 	 	 	 	 	57/55	 	
+3	2170020.2410.23.72	Kinh tế chính trị Mác - Lênin	2	Văn Công Vũ	Thứ 4: 9-10,F310	3-18	7/19/2024 11:17:26 AM	 	 	 	 	 	60/58	 	
+4	1023693.2410.23.11	Lập trình hướng đối tượng	2.5	Lê Thị Mỹ Hạnh	Thứ 3: 3-5,E207	3-18	7/15/2024 10:57:33 AM	 	 	 	 	 	55/55	 	
+5	1022913.2410.23.11	Nguyên lý hệ điều hành	2.5	Nguyễn Thị Lệ Quyên	Thứ 4: 1-3,E102	3-18	7/15/2024 10:57:33 AM	 	 	 	 	 	52/55	 	
+6	1023690.2410.23.11B	PBL 2: Đồ án cơ sở lập trình	2	Lê Thị Mỹ Hạnh	Thứ 3: 1-2,E208	3-18	7/15/2024 12:05:35 PM	 	 	 	 	 	29/28	 	
+7	1022830.2410.23.11	Phân tích & thiết kế giải thuật	2	Đặng Thiên Bình	Thứ 5: 9-10,E302	3-18	7/15/2024 10:57:33 AM	 	 	 	 	 	58/55	 	
+8	2090101.2410.23.11	Tư tưởng Hồ Chí Minh	2	Dương Anh Hoàng	Thứ 4: 4-5,E102	3-18	7/15/2024 10:57:33 AM	 	 	 	 	 	56/55

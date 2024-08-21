@@ -31,7 +31,7 @@ return (<ul id={subject.id} className={'line'}>
 <Input index={parseInt(index)*5+3}reflist={reflist} id={subject.id}className={"begin"} value={subject.begin} title={'Từ tiết'}edit={edit} />
 <Input index={parseInt(index)*5+4}reflist={reflist} id={subject.id}className={"end"} value={subject.end} title={'Đến hết tiết'}edit={edit} />
 {/* <button className="delete" value={subject.id } onClick={(e)=>{del(e.target.value)}}>xóa</button> */}
-<div><i data-value={subject.id } onClick={(e)=>{del(e.target.dataset.value)}} class="del-icon fa-solid fa-xmark btn btn-danger btn-sm rounded-0 text-white"></i></div>
+<li><i data-value={subject.id } onClick={(e)=>{del(e.target.dataset.value)}} class="del-icon fa-solid fa-xmark btn btn-danger btn-sm rounded-0 text-white del"></i></li>
 </ul>)
 }
 

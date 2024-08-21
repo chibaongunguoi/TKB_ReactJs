@@ -1,36 +1,32 @@
-div.des{
-  word-wrap: break-word;      /* IE 5.5-7 */
-  white-space: -moz-pre-wrap; /* Firefox 1.0-2.0 */
-  white-space: pre-wrap;
-  width: 160px;
-}
+
 .dropdown-item{
   font-size: 21px;
 }
 .dropdown-menu .dropdown-menu {
 padding: 0px;
- 
 }
-li.insert:hover ul{
+li.insert-tkb:hover ul{
   display: block;
   position: absolute;
   height: 41px;
   left:99.5%; 
   top:49px;
 }
+li.insert-dk:hover ul{
+  display: block;
+  position: absolute;
+  height: 41px;
+  left:99.5%; 
+  top:88px;
+}
 #wrapper {
   margin: 0px auto;
   width: 1700px;
-  
-
-  /* background-color: red;  */
 }
 section.nav-link{
   width: 240px;
-  /* display: flex; */
   padding: 5px;
-  /* display: flex;
-    align-items: flex-start; */
+
 }
 div.menu-item-name{
   float: left;
@@ -41,9 +37,12 @@ i.toggle-function{
 #line ul,.function {
   margin-top: 40px;
 }
-ul.line {
+/* ul.line {
   display:flex
-}
+} */
+ .line li{
+  display: inline;
+ }
 .del{
   padding-top: 0px
 }
@@ -60,9 +59,20 @@ ul {
   list-style-type: none;
   padding: 0px;
 }
-li input:not(.name) {
-  width: 90px;
-  
+li input{
+  margin-right: 4vw;
+}
+
+.day,.begin,.end{
+  width: 3.5vw;
+}
+.name{
+  width: 24vw;
+  /* width: 350px; */
+}
+.room{
+  width: 7vw;
+  /* width: 100px; */
 }
 input {
   font-size: 24px;
@@ -77,11 +87,13 @@ ul ul {
   list-style-type: none;
   margin: 0px;
   margin-top: 20px;
-  display: flex;
+  /* display: flex; */
   justify-content: space-between;
   flex-wrap: wrap;
 }
-
+i.del{
+  margin:0px;
+}
 #name {
   margin: 0px auto;
 }
@@ -92,7 +104,7 @@ div.desnew{
   word-wrap: break-word;      /* IE 5.5-7 */
   white-space: -moz-pre-wrap; /* Firefox 1.0-2.0 */
   white-space: pre-wrap;
-  width: 170px;
+  width: 9.5vw;
   position: absolute;
   left:55px;
   top:-10px;
@@ -113,16 +125,12 @@ div.desnew{
 }
 .table {
   max-width: 150%;
-  width:1700px ;
+  width:80vw ;
   display: flex;
   justify-content: space-between;
   margin-left: 100px;
 }
-/* .table2{
-    position: relative;
-    left:45px;
-    top:-480px;     
-} */
+
 .table li div:first-child {
   width: 60px;
   position: relative;
@@ -174,7 +182,7 @@ font-size: 22px;
   text-align:right;
 }
 .bigtable{
-  width: 1700px;
+  width: 100vw;
   padding-top: 10px;
   display: flex;
   font-size: 20px;
