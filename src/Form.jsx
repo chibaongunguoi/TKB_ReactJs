@@ -1,12 +1,8 @@
 import {  useState,useRef,useEffect } from 'react'
-import {renderTable,validate,adddes,resetColor,initSubject} from './render_table'
+import {renderTable,initSubject} from './render_table'
 let id=1;
 let pointer=0;
 var color=["#55E6C1","#fd9644","#8e44ad","#f1c40f","#4b7bec","#2ecc71","#fc5c65"]
-// window.addEventListener('resize', function(event) {//
-//   $(window).scrollTop(0);
-//   location.reload();
-// });//
 export function Input({value,className,title,edit,id,reflist,index}){
   function handlefocus(e){
     pointer=parseInt(e.target.dataset.value);
@@ -52,36 +48,11 @@ export default function Form({count,currentForm}) {
     id=count+1;
     return initSubject(count);
   })
-  let [nodes,table]=renderTable();
-  let [top,setTop]=useState(nodes.size?nodes.get(1).getBoundingClientRect().top:0);
-  let [left,setleft]=useState(nodes.size?nodes.get(1).getBoundingClientRect().left:0);
-  
-  function updateDes(subjects,des){
-    resetColor(nodes);
-    for (let i of subjects){
-      let day=parseInt(i.day);
-      let begin=parseInt(i.begin);
-      let end=parseInt(i.end);
-      if(validate(day,begin,end))
-        {
-          let top=nodes.get((day-2)*14+begin).getBoundingClientRect().top;
-          let left=nodes.get((day-2)*14+begin).getBoundingClientRect().left;
-          setDes(des =>adddes(des,top,left,i));
-          for (let j=begin;j<=end;j++){
-            nodes.get((day-2)*14+j).style.backgroundColor=color[day-2]
-          }
-        }
-        else{
-          if (des.filter((item) =>item.id==i.id).length>0){
-            setDes(des.filter((item) =>item.id!=i.id))
-          }
-        }
-    }
-  }
   useEffect(()=>{
     localStorage.setItem(`subject${currentForm}`, JSON.stringify(subjects));
   },[subjects])
-
+  
+  let [table]=renderTable(subjects);
  
   function add(){
     setSubject([...subjects,{id:id,name:'',room:'',day:'',begin:'',end:''}]);
@@ -102,7 +73,6 @@ export default function Form({count,currentForm}) {
     setSubject(subjects.filter((subject)=> subject.id!=id));
     setDes(des.filter((des)=> des.id!=id));
   }
-
   useEffect(()=>{
 function keyup(e){
   if(e.key=="Enter"||e.key=="ArrowRight")
@@ -137,7 +107,7 @@ function keyup(e){
       <div className="bigtable">
         <Time />
         <div className="smallbox">
-          <Table subjects={subjects} des={des} setDes={setDes} nodes={nodes} table={table} updateDes={updateDes}/>
+          <Table subjects={subjects} des={des} setDes={setDes} table={table} />
         </div>
       </div>
   </>
@@ -164,13 +134,9 @@ function Time(){
   );
 }
 
-function Table({subjects,des,setDes,nodes,table,updateDes}){
+function Table({subjects,des,setDes,table}){
   
-  
-  useEffect(()=>{
-    updateDes(subjects,des);
-  },[subjects])
-  
+ 
   return (
     <>
     <ul className="table" id="table">

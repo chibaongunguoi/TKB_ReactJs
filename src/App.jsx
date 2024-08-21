@@ -23,12 +23,14 @@ export default function App() {
   useEffect(()=>{
     localStorage.setItem('currentForm',currentForm );
   },[currentForm])
+ 
   function changecurrentForm(e){
     e.preventDefault();
     setCurrentForm(e.target.dataset.value);
     // e.target.style.backgroundColor='blue';
   }
   return(
+    
   <div id="wrapper">
     <Analytics />
     <Bar setCurrentForm={setCurrentForm}setFormList={setFormList}changecurrentForm={changecurrentForm} currentForm={currentForm} formList={formList}/> 
@@ -78,9 +80,7 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
     let tkb=prompt('Nhập thời khóa biểu ở web trường :');
    if (tkb==null||tkb=='')
     return;
-  let id=0,name='',room='',day='',begin='',end='',subject=[];
-
-
+  let id=0,name='',room='',day='',begin='',end='',subject=[],kt=0;
     let dem=0,i =0;
     while (i<tkb.length){
       dem=0,name='',room='',day='',begin='',end='';
@@ -99,10 +99,14 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
       while (tkb[i]!=','){
         i++;
       } 
-      if (tkb[i-1] in ['2','3','4','5','6','7','8','9']){
+      
+      for (let j=2;j<=7;j++)
+        if (tkb[i-1]==j.toString()){
       day+=tkb[i-1];
-      }
-      else day='8';
+    kt=1}
+      
+      if (kt==0)
+      day='8';
       i++;
       while (tkb[i]!='-'){
         begin+=tkb[i];
@@ -114,6 +118,7 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
         i++;
       }
       i++;
+      
       while (tkb[i]!='\t'){
         room+=tkb[i];
         i++;
@@ -125,7 +130,7 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
       i++;
       id++;
     subject.push({id:id,name:name,room:room,day:day,begin:begin,end:end});
-    }
+  }
     localStorage.setItem(`subject${idForm}`,JSON.stringify(subject));
     location.reload();
     return;

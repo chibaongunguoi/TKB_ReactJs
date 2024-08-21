@@ -1,37 +1,90 @@
 import { useRef } from 'react'
-export function renderTable(){
-    let itemsRef = useRef(new Map());
-  let day=[];
-  for (let i=2;i<=8;i++)
+export function renderTable(subjects){
+  var color=["#55E6C1","#fd9644","#8e44ad","#f1c40f","#4b7bec","#2ecc71","#fc5c65"]
+  let desn=[],dem=0,kt=0,p=0;
+  let inf=
+  <>
+  <b>DSTT</b>
+  <br />E205
+  </>;
+  for (let i of subjects){
+    let day=parseInt(i.day);
+    let begin=parseInt(i.begin);
+    let end=parseInt(i.end);
+    if(validate(day,begin,end))
+      {
+        desn.push({id:i.id,begin:(day-2)*14+begin,dem:end-begin,content:<>
+          <b>{i.name}</b>
+          <br />{i.room}
+          </>});
+        //tô màu xong rồi mới gán đếm
+        // for (let j=begin;j<=end;j++){
+        //   nodes.get((day-2)*14+j).style.backgroundColor=color[day-2]
+        // }
+      }
+  }
+   for (let i=0;i<desn.length-1;i++){
+    for (let j=i+1;j<desn.length;j++){
+      if (desn[i].begin>desn[j].begin){
+        let t=desn[i];
+        desn[i]=desn[j];
+        desn[j]=t
+      }
+    }
+   }
+  let day=[],i=2,j=1;
+  while (i<=8)
     {
       let line=[];
       if (i==8)
         line.push(<div>CN</div>)
       else
       line.push(<div>Thứ {i}</div>)
-      for (let j=1;j<=14;j++)
-        if (j==6 ||j==11)
-        line.push(<p  
-            className="more" ref={(node) => {
-          if (node) {
-            itemsRef.current.set((i-2)*14+j, node);
-          } else {
-            itemsRef.current.delete((i-2)*14+j);
+      j=1;
+      while (j<=14){
+        if ((p<desn.length&&(i-2)*14+j==desn[p].begin))
+        {
+          line.push(
+            <div className='wrapnode'>
+              <p  
+                  className={j==6||j==11?"node more":"node"} style={{backgroundColor:color[parseInt(desn[p].begin/14)]}}
+                    >{j}</p>
+               <div className="desnew" >{desn[p].content}</div>
+              </div>
+            )
+            j++;
+          dem+=desn[p].dem;
+          while (dem!=0){
+            line.push(
+              <div className='wrapnode'>
+                <p  
+                    className={j==6||j==11?"node more":"node"} style={{backgroundColor:color[parseInt(desn[p].begin/14)]}}  
+                    >{j}</p>
+                 
+                </div>
+              )
+              dem--;
+              j++;
           }
-        }}>{j}</p>)
-      else
-      line.push(<p ref={(node) => {
-        if (node) {
-          itemsRef.current.set((i-2)*14+j, node);
-        } else {
-          itemsRef.current.delete((i-2)*14+j);
+          p++;
         }
-      }}
->{j}</p>)
-
-       day.push(<li key={i}>{line}</li>) 
+        else{
+        line.push(
+          <div className='wrapnode'>
+            <p  
+                className={j==6||j==11?"node more":"node"}  
+                >{j}</p>
+             
+            </div>
+          )
+          j++;
+      }
+      
     }
-    return [itemsRef.current,day];
+       day.push(<li key={i}>{line}</li>)
+       i++; 
+    }
+    return [day];
 }
 
 export function validate(day,begin,end){
@@ -48,30 +101,7 @@ export function validate(day,begin,end){
   return true;
 }
 
-export function adddes(des,top,left,i){
-  if (des.length==0||des.filter((item)=>item.id==i.id).length==0)
-    return [...des,{id:i.id,
-      content:<div className='des' style={{
-        position:'absolute',top:top,left:left+60}}>
-      <b>{i.name}</b>
-     <br />{i.room} 
-     </div>}]
-     else{
-            return des.map((item)=>{
-              if (item.id==i.id)
-                return {id:i.id,
-                  content:<div className='des' style={{position:'absolute',top:top,left:left+60,}}>
-                  <b>{i.name}</b>
-                 <br />{i.room} 
-                 </div>}
-                 else return item;
-            })
-           }    
-}
-export function resetColor(nodes){
-  for (let i=1;i<=98;i++)
-    nodes.get(i).style.backgroundColor='#7f8fa6';
-}
+
 export function initSubject(count){
   let lines=[];
     for ( let id=1;id<=count;id++)
