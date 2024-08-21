@@ -96,7 +96,7 @@ export function checkdesn(desn,subjects){
   let check=[],i=1,p=0;
   while (p<desn.length){
     i=1;
-    while (p+i<desn.length && desn[p].begin+desn[p].dem>desn[p+i].begin){
+    while (p+i<desn.length && desn[p].begin+desn[p].dem>=desn[p+i].begin){
       if (i==1)
       check.push(desn[p].id,desn[p+i].id)
     else
