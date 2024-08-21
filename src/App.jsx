@@ -132,7 +132,7 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
           </ul>
         </li>
         <li className="">
-          <a className='dropdown-item text-danger' href=""  onClick={(e)=>{e.preventDefault();localStorage.removeItem(`subject${i.id}`);location.reload()}} >Làm mới TKB này</a>
+          <a  className='dropdown-item text-danger' href=""  onClick={(e)=>{e.preventDefault();localStorage.removeItem(`subject${i.id}`);location.reload()}} >Làm mới TKB này</a>
         </li>  
       </ul>
       </section>
