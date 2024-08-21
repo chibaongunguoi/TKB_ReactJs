@@ -49,7 +49,9 @@ i.toggle-function{
 label{
   font-size: 22px;
 }
-
+.smallbox {
+  width: 960px;
+}
 * {
   font-family: "Roboto", sans-serif;
 }
@@ -102,7 +104,7 @@ div.desnew{
   word-wrap: break-word;      /* IE 5.5-7 */
   white-space: -moz-pre-wrap; /* Firefox 1.0-2.0 */
   white-space: pre-wrap;
-  width: 8.7vw;
+  width: 8.5vw;
   position: absolute;
   left:55px;
   top:-10px;
@@ -137,7 +139,7 @@ div.desnew{
   font-size: 20px;
 }
 .table li div.wrapnode {
-  width: 11.5vw;
+  width: 90px;
   position: relative;
   left: 6px;
   font-size: 20px;
@@ -196,22 +198,8 @@ font-size: 22px;
   margin-top: 20%;
   color: #eb2f06;
 }
-
-.smallbox {
-  width: 100vw;
-}
-
-@media (max-width:1300px) {
+@media (max-width:500px) {
   .info{
     display: none;
-  }
-  .table{
-    margin-left: 0px;
-  }
-  .table li div.wrapnode {
-    width: 14vw;
-  }
-  div.desnew{
-    width: 10vw;
   }
 }
