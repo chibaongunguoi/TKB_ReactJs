@@ -63,10 +63,8 @@ function Bar({setCurrentForm,setFormList,editform,delform,addForm,changecurrentF
      if (JSON.parse(localStorage.getItem(`subject${id}`)))
       {
       subjects= JSON.parse(localStorage.getItem(`subject${id}`));
+     localStorage.setItem(`subject${idForm}`, JSON.stringify(subjects));  
       }
-      else{
-     subjects=initSubject(count);}
-     localStorage.setItem(`subject${idForm}`, JSON.stringify(subjects));
       setFormList([...formList,{id:idForm++,title:title}]);
   }
   function addForm(){
